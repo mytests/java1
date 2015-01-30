@@ -1,0 +1,25 @@
+@(message: String, msgType: String)
+
+@main2("Welcome", "Login") {
+
+<form method="post" action="@routes.Application.login()" type="application/form-url-encoded">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="Your username">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Your password">
+    </div>
+    @if(!message.isEmpty){
+        @if(msgType == "error"){
+
+            <div class="alert alert-danger">@message</div>
+        }else{
+            <div class="alert alert-danger">@message</div>
+        }
+    }
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+}

@@ -1,0 +1,31 @@
+@(title: String, heading1: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/custom.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+	<div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 col-md-offset-4">
+                <h1>@heading1</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-3 col-md-offset-4">
+                @content
+                <hr>
+            </div>
+        </div>
+	</div>
+    </body>
+</html>
