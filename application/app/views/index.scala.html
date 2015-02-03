@@ -1,7 +1,11 @@
-@(message: String)
+@(username: String)
 
-@main("Welcome to Play") {
+@main2("Bienvenido", "Índice", username) {
 
-    @play20.welcome(message, style = "Java")
+    <ul class="">
+        <li><a href="@routes.Application.restricted(1)">Página restringida 1</a></li>
+        <li><a href="@routes.Application.restricted(2)">Página restringida 2</a></li>
+        <li><a href="@routes.Application.restricted(3)">Página restringida 3</a></li>
+    </ul>
 
 }

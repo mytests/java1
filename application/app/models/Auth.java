@@ -2,11 +2,9 @@ package models;
 
 import java.lang.Boolean;
 
-public class Authentication{
+public class Auth{
 
-
-
-    public Authentication(){
+    public Auth(){
 
     }
 
@@ -25,6 +23,22 @@ public class Authentication{
         }else{
             return false;
         }
+    }
+
+
+    public static Boolean authorize(String username, int requiredRoleId){
+
+        models.User user = models.User.find(username);
+
+        if(user == null){
+            return false;
+        }
+
+        if(user.roleId == requiredRoleId){
+            return true;
+        }
+
+        return false;
     }
 
 }

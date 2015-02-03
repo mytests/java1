@@ -17,11 +17,11 @@ public class User{
     }
 
     public static void seedUsers(){
-        models.User user = new models.User("user1", "pass", 0);
+        models.User user = new models.User("user1", "pass", 1);
         user.save();
-        models.User user1 = new models.User("user2", "pass", 1);
+        models.User user1 = new models.User("user2", "pass", 2);
         user1.save();
-        models.User user2 = new models.User("user3", "pass", 2);
+        models.User user2 = new models.User("user3", "pass", 3);
         user2.save();
     }
 

@@ -1,0 +1,8 @@
+@(username: String, roleid: Int)
+
+@main2("Benvenido", "Página restringida", username) {
+
+    <span>Este es el contenido restringido a usuarios con roleId @roleid.</span>
+    <span><a href="@routes.Application.index()">volver</a></span>
+
+}

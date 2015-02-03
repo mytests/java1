@@ -1,4 +1,4 @@
-@(title: String, heading1: String)(content: Html)
+@(title: String, heading1: String, username:String)(content: Html)
 
 <!DOCTYPE html>
 
@@ -11,9 +11,17 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/custom.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-	<div class="container">
+	<div class="container-fluid">
+        @if(username != ""){
+        <div class="row account">
+            <div class="col-xs-12 col-md-3 col-md-offset-4 bg-info text-right">
+                Hola @username (<a href="@routes.Application.logout()" id="logout" class="btn btn-link">salir</a>)
+            </div>
+        </div>
+        }
         <div class="row">
             <div class="col-xs-12 col-md-3 col-md-offset-4">
                 <h1>@heading1</h1>

@@ -21,20 +21,20 @@ import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
 
-public class AuthenticationTest {
+public class AuthTest {
 
     @Test
     public void authenticateExisting() {
         models.User user = new models.User("testuser", "testpassword", 0);
         user.save();
-        boolean auth = models.Authentication.authenticate("testuser", "testpassword");
+        boolean auth = models.Auth.authenticate("testuser", "testpassword");
         assertThat(auth).isTrue();
     }
 
     @Test
     public void authenticateNonExisting() {
 
-        boolean auth = models.Authentication.authenticate("idontexist", "testpassword");
+        boolean auth = models.Auth.authenticate("idontexist", "testpassword");
         assertThat(auth).isFalse();
     }
 
@@ -42,8 +42,30 @@ public class AuthenticationTest {
     public void authenticateNonWrongPass() {
         models.User user = new models.User("testuser", "testpassword", 0);
         user.save();
-        boolean auth = models.Authentication.authenticate("testuser", "wrongpassword");
+        boolean auth = models.Auth.authenticate("testuser", "wrongpassword");
         assertThat(auth).isFalse();
+    }
+
+    @Test
+    public void isAuthorized(){
+        models.User user = new models.User("testuser", "testpassword", 0);
+        user.save();
+        boolean authorized = models.Auth.authorize("testuser", 0);
+        assertThat(authorized).isTrue();
+    }
+
+    @Test
+    public void isAuthorizedNonAuthorized(){
+        models.User user = new models.User("testuser", "testpassword", 0);
+        user.save();
+        boolean authorized = models.Auth.authorize("testuser", 1);
+        assertThat(authorized).isFalse();
+    }
+
+    @Test
+    public void isAuthorizedNonExistent(){
+        boolean authorized = models.Auth.authorize("nonexistentuser", 0);
+        assertThat(authorized).isFalse();
     }
 
 
