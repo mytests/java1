@@ -10,30 +10,33 @@
 
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/custom.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-	<div class="container-fluid">
-        @if(username != ""){
-        <div class="row account">
-            <div class="col-xs-12 col-md-3 col-md-offset-4 bg-info text-right">
-                Hola @username (<a href="@routes.Application.logout()" id="logout" class="btn btn-link">salir</a>)
+        <div class="container-fluid">
+            @if(username != ""){
+            <div class="row account">
+                <div class="col-xs-12 col-md-3 col-md-offset-4 bg-info text-right">
+                    Hola @username (<a href="@routes.Application.logout()" id="logout" class="btn btn-link">salir</a>)
+                </div>
+            </div>
+            }
+            <div class="row">
+                <div class="col-xs-12 col-md-3 col-md-offset-4">
+                    <h1>@heading1</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-3 col-md-offset-4">
+                    @content
+                    <hr>
+                </div>
             </div>
         </div>
-        }
-        <div class="row">
-            <div class="col-xs-12 col-md-3 col-md-offset-4">
-                <h1>@heading1</h1>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-3 col-md-offset-4">
-                @content
-                <hr>
-            </div>
-        </div>
-	</div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/script-v1.js")" type="text/javascript"></script>
     </body>
 </html>

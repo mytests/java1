@@ -2,7 +2,7 @@
 
 @main2("Bienvenido", "Login", "") {
 
-<form method="post" action="@routes.Application.login()" type="application/form-url-encoded">
+<form method="post" id="loginform" action="@routes.Application.login()" type="application/form-url-encoded">
     <div class="form-group">
         <label for="username">Nombre de usuario</label>
         <input type="text" name="username" class="form-control" id="username" placeholder="Introduce aquí tu nombre de usuario">
@@ -16,9 +16,10 @@
 
             <div class="alert alert-danger">@message</div>
         }else{
-            <div class="alert alert-danger">@message</div>
+            <div class="alert alert-warning">@message</div>
         }
     }
+    <div id="loginerror" class="alert alert-danger" style="display:none;">El nombre de usuario y/o contraseña no son válidos.</div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 

@@ -24,6 +24,7 @@ public class Application extends Controller {
 
     public static Result index() {
         if(!sessionCheck(session("username"))){
+            flash("notice", "La sessión ha caducado");
             return redirect("/login");
         }
 
@@ -33,7 +34,7 @@ public class Application extends Controller {
     public static Result logout() {
         session("expiration_time", "0");
 
-        return ok("Logged out");
+        return ok(logout.render());
     }
 
     public static Result login() {
@@ -55,7 +56,7 @@ public class Application extends Controller {
         }
 
         //login failed
-        return redirect("/login");
+        return badRequest("ko");
 
         //ObjectNode result = Json.newObject();
         //result.put("result", "ok");
@@ -64,12 +65,17 @@ public class Application extends Controller {
     }
 
     public static Result loginForm() {
-        return ok(login.render("", ""));
+        String message = flash("notice");
+        if(message == null) {
+            message = "";
+        }
+        return ok(login.render(message, ""));
     }
 
 
     public static Result restricted(int id){
         if(!sessionCheck(session("username"))){
+            flash("notice", "La sessión ha caducado");
             return redirect("/login");
         }
 
@@ -87,7 +93,7 @@ public class Application extends Controller {
         }
 
         if(!models.Auth.authorize(session("username"), roleId)){
-            return unauthorized("Acceso restringido");
+            return unauthorized(unauthorized.render(session("username"), roleId));
         }
 
         return ok(restricted.render(session("username"), roleId));
@@ -110,6 +116,7 @@ public class Application extends Controller {
 
         long currentTime = System.currentTimeMillis() / 1000L;
 
+
         if(sessionExpirationTime < currentTime){
             return false;
         }
@@ -123,8 +130,8 @@ public class Application extends Controller {
     private static void sessionUpdate(String username){
         //update expiration time
         long currentTime = System.currentTimeMillis() / 1000L;
-        long newExpirationTime = (currentTime + 300000L);
-        session("expiration_time", String.valueOf(newExpirationTime));//5 minutes in miliseconds
+        long newExpirationTime = (currentTime + 300L);//5 minutes in seconds
+        session("expiration_time", String.valueOf(newExpirationTime));
         session("username", username);
     }
 }
